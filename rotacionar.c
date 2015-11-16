@@ -1,4 +1,6 @@
 #include "rotacionar.h"
+#include "getPai.h"
+#include "getTipoNo.h"
 
 /* para dia 23/11
  * prova dia 27/11
@@ -15,23 +17,36 @@
 	-------------------------------------------------------------------------------------
 */
 
-
-Node* rotacionar(Node* raiz){
-	Altura altura;
+Node* rotacionar(Node* no, int valor){
 	Node* noPai;
-	int fatorBalanceamento = getFatorBalanceamento(altura);
+	int fatorBalanceamento;
 	//int fatorBalanceamentoPai = getFatorBalanceamento(altura);
-	
-	if (isBalanceado(fatorBalanceamento) != 1){
-		
-	}
-		
-	
-	
+    
+    if (no != NULL){
+        if (no->valor == valor){
+			no->altura = getAltura(no); 
+			fatorBalanceamento = getFatorBalanceamento(no, altura);
+			
+			if (isBalanceado(fatorBalanceamento) != 1){
+				getRotacao();		
+			}
+        }
+        else if (no->valor > valor){
+			noPai = getPai(no, valor);
+            return remover(no->sae, valor);
+        }
+        else{
+			noPai = getPai(no, valor);
+            return remover(no->sad, valor);
+        }
+    }
+    return no;	
 }
 
-int getAltura(){
-	
+int getAltura(Node no){
+	if (no != NULL){
+		
+	}
 }
 
 int getFatorBalanceamento(Altura altura){
@@ -45,10 +60,10 @@ int isBalanceado(int fatorBalanceamento){
 		return 0;
 }
 
-Node* getRotacao(Node* no, int fbPai, int fbFilho){
+void getRotacao(Node* no, int fbPai, int fbFilho){
 	if (fbPai == 2){
 		if(fbFilho == 1 || fbFilho == 0){
-			return rotacaoSimplesEsquerda(no);
+			rotacaoSimplesEsquerda(no); //noFilho ocupa o lugar do pai
 		}
 		else if (fbFilho == -1){
 			 rotacaoSimplesDireita(noPai);

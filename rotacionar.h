@@ -3,6 +3,6 @@
 Node* rotacionar(Node*);
 Node* rotacaoSimplesEsquerda(Node*);
 Node* rotacaoSimplesDireita(Node*);
-int getFatorBalanceamento(Altura);
+int getFatorBalanceamento(Node*);
 int isBalanceado(int);
 Node* getPai(Node*, int);

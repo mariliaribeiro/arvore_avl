@@ -3,12 +3,12 @@
 #include "inserir.h"
 #include "ordenar.h"
 #include "buscar.h"
-#include "remover.h"
+//#include "remover.h"
 
 void popular(Arvore*);
 void exibeOrdem(Arvore*);
 void exibeBusca(Arvore*);
-void exibeRemocao(Arvore*);
+//void exibeRemocao(Arvore*);
 
 int main(){
 	Arvore* minhaArvore;
@@ -16,8 +16,8 @@ int main(){
     popular(minhaArvore);
     exibeOrdem(minhaArvore);
     exibeBusca(minhaArvore);
-    exibeRemocao(minhaArvore);
-    exibeOrdem(minhaArvore);
+    //exibeRemocao(minhaArvore);
+    //exibeOrdem(minhaArvore);
  
 	return 1;
 }
@@ -61,9 +61,9 @@ void exibeBusca(Arvore* minhaArvore){
     imprimeBusca(buscar(minhaArvore->raiz, 31), 31);
 }
 
-void exibeRemocao(Arvore* minhaArvore){
+/*void exibeRemocao(Arvore* minhaArvore){
     printf("\n#----- Removendo valores da árvore: -----#\n");
     remover(minhaArvore->raiz, 13);
     remover(minhaArvore->raiz, 25);
     remover(minhaArvore->raiz, 10);
-}
+}*/

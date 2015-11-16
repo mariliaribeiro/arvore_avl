@@ -6,20 +6,23 @@
 
 typedef struct node Node; 
 typedef struct arvoreBinaria Arvore;
-typedef struct alturaSubArvores Altura;
+//typedef struct alturaSubArvores Altura;
 
 struct node {
 	int valor; //element
 	Node *sae; //sub árvore a esquerda
-	Node *sad; //sub árvore a direita
+	Node *sad; //sub árvore a direita	
+	int alturaEsquerda, alturaDireita;
+	
+	//Altura altura;
 };
 
 struct arvoreBinaria {
 	Node* raiz;
 };
 
-struct alturaSubArvores{
+/*struct alturaSubArvores{
 	int alturaDireita;
 	int alturaEsquerda;
-}
+}*/
 #endif

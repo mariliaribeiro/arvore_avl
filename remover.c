@@ -1,4 +1,6 @@
 #include "remover.h"
+#include "getPai.h"
+#include "getTipoNo.h"
 
 Node* remover(Node* no, int valor){
     Node* noPai;
@@ -6,16 +8,19 @@ Node* remover(Node* no, int valor){
     if (no != NULL){
         if (no->valor == valor){    
             // é folha?
-			if (no->sae == NULL && no->sad == NULL)				
-				return isFolha(no, noPai, valor);
+            //if (no->sae == NULL && no->sad == NULL)				
+            if(isFolha(no) == 1)			
+				return removerFolha(no, noPai, valor);
             
             // é sub folha?
-			else if ((no->sae == NULL && no->sad != NULL) || (no->sad == NULL && no->sae != NULL)) 
-				return isSubFolha(no, noPai, valor);	
+			//else if ((no->sae == NULL && no->sad != NULL) || (no->sad == NULL && no->sae != NULL)) 
+			else if(isSubFolha(no) == 1)
+				return removerSubFolha(no, noPai, valor);	
 			
 			// é pai de dois filhos (maior dos menores)?
-			else if (no->sae != NULL && no->sad != NULL)				
-				return isPaiDoisFilhos(no, noPai, valor);
+			//else if (no->sae != NULL && no->sad != NULL)				
+			else if(isPaiDoisFilhos(no) == 1)
+				return removerPaiDoisFilhos(no, noPai, valor);
         }
         else if (no->valor > valor){
 			noPai = getPai(no, valor);
@@ -29,7 +34,7 @@ Node* remover(Node* no, int valor){
     return no;
 }
 
-Node* isFolha(Node* no, Node* noPai, int valor){
+Node* removerFolha(Node* no, Node* noPai, int valor){
 	Node* noRemover = no;
 	
 	if(noPai->valor > valor)
@@ -44,7 +49,7 @@ Node* isFolha(Node* no, Node* noPai, int valor){
 
 
 //if ternário -> condição ? verdadeiro : falso
-Node* isSubFolha(Node* no, Node* noPai, int valor){
+Node* removerSubFolha(Node* no, Node* noPai, int valor){
 	Node* noRemover = no;
 	if(noPai->valor > valor)		
 		noPai->sae = no->sad != NULL ? noRemover->sad : noRemover->sae;
@@ -56,7 +61,7 @@ Node* isSubFolha(Node* no, Node* noPai, int valor){
 	return no;	
 }
 
-Node* isPaiDoisFilhos(Node* no, Node* noPai, int valor){	
+Node* removerPaiDoisFilhos(Node* no, Node* noPai, int valor){	
 	Node* noRemover = no;
     Node* noSubstituto = getNoSubstituto(no->sae);	 //filho esquerdo do nó que quero remover
     Node* noPaiSubstituto = getPai(no->sae, noSubstituto->valor);
@@ -77,7 +82,7 @@ Node* isPaiDoisFilhos(Node* no, Node* noPai, int valor){
 	return no;	
 }
 
-Node* getPai(Node* no, int valor){
+/*Node* getPai(Node* no, int valor){
     if(no != NULL){
         if (no->valor < valor){
             if (no->sad != NULL && no->sad->valor == valor)
@@ -94,7 +99,7 @@ Node* getPai(Node* no, int valor){
     }else{
         return NULL;
     }
-}
+}*/
 
 Node* getMaiorMenores(Node* no){
 	if(no != NULL){
